@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Icon from "@/components/ui/icon";
 
-const HERO_BG = "https://cdn.poehali.dev/projects/96f077e8-0ece-46b4-8f71-5de4866d74b2/files/1fabf953-6925-46e5-b82d-21dd4dec7c67.jpg";
+const HERO_BG = "https://cdn.poehali.dev/projects/96f077e8-0ece-46b4-8f71-5de4866d74b2/bucket/2e523c9c-96f3-4b69-afb9-a52ab9d67941.png";
 
 export default function Index() {
   const [formData, setFormData] = useState({ name: "", phone: "", comment: "" });
@@ -26,28 +26,37 @@ export default function Index() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16 lg:h-20">
 
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 border-2 border-[#D97706] rounded-full flex items-center justify-center shrink-0">
-              <svg viewBox="0 0 40 40" className="w-6 h-6 text-[#D97706]" fill="none" stroke="currentColor" strokeWidth="2">
-                <polygon points="20,3 37,13 37,27 20,37 3,27 3,13" />
-                <circle cx="20" cy="20" r="3" fill="#D97706" />
-                <line x1="20" y1="3" x2="20" y2="17" />
-                <line x1="37" y1="13" x2="23" y2="20" />
-                <line x1="37" y1="27" x2="23" y2="20" />
-                <line x1="20" y1="37" x2="20" y2="23" />
-                <line x1="3" y1="27" x2="17" y2="20" />
-                <line x1="3" y1="13" x2="17" y2="20" />
+            <div className="w-12 h-12 relative shrink-0">
+              <svg viewBox="0 0 48 48" className="w-full h-full">
+                {/* Шестерёнка */}
+                <g fill="#D1D5DB">
+                  {Array.from({ length: 12 }).map((_, i) => {
+                    const angle = (i * 30 * Math.PI) / 180;
+                    const x1 = 24 + Math.cos(angle) * 18;
+                    const y1 = 24 + Math.sin(angle) * 18;
+                    const x2 = 24 + Math.cos(angle) * 23;
+                    const y2 = 24 + Math.sin(angle) * 23;
+                    return <rect key={i} x={x1 - 2} y={y1 - 2} width="4" height="6" transform={`rotate(${i * 30} ${x1} ${y1})`} />;
+                  })}
+                </g>
+                <circle cx="24" cy="24" r="18" fill="none" stroke="#D1D5DB" strokeWidth="2.5" />
+                <circle cx="24" cy="24" r="14" fill="#1C1C1C" />
+                {/* Компас-роза */}
+                <polygon points="24,10 26,24 24,38 22,24" fill="#D97706" />
+                <polygon points="10,24 24,22 38,24 24,26" fill="#E5E7EB" />
+                <circle cx="24" cy="24" r="2" fill="#1C1C1C" />
               </svg>
             </div>
             <div className="leading-tight">
-              <div className="text-[11px] font-semibold tracking-[0.22em] text-white uppercase">Свердловск</div>
-              <div className="text-[11px] font-semibold tracking-[0.22em] text-white uppercase">Фундамент</div>
+              <div className="text-[12px] font-bold tracking-[0.18em] text-white uppercase">Свердловск</div>
+              <div className="text-[12px] font-bold tracking-[0.18em] text-white uppercase">Фундамент</div>
             </div>
           </div>
 
-          <nav className="hidden lg:flex items-center gap-8">
-            {[["О нас", "about"], ["Услуги", "services"], ["Мастера", "team"], ["Отзывы", "reviews"], ["Контакты", "contact"]].map(([label, id]) => (
+          <nav className="hidden lg:flex items-center gap-10">
+            {[["О нас", "about"], ["Услуги", "services"], ["Проекты", "team"], ["Цены", "reviews"], ["Контакты", "contact"]].map(([label, id]) => (
               <button key={id} onClick={() => scrollTo(id)}
-                className="text-sm text-white/70 hover:text-white transition-colors tracking-wide">
+                className="text-base text-white/85 hover:text-white transition-colors">
                 {label}
               </button>
             ))}
@@ -64,7 +73,7 @@ export default function Index() {
 
         {menuOpen && (
           <div className="lg:hidden bg-[#2A2A2A] border-t border-white/10 px-4 py-6 flex flex-col gap-4">
-            {[["О нас", "about"], ["Услуги", "services"], ["Мастера", "team"], ["Отзывы", "reviews"], ["Контакты", "contact"]].map(([label, id]) => (
+            {[["О нас", "about"], ["Услуги", "services"], ["Проекты", "team"], ["Цены", "reviews"], ["Контакты", "contact"]].map(([label, id]) => (
               <button key={id} onClick={() => scrollTo(id)}
                 className="text-left text-white/80 hover:text-white py-1 text-base">
                 {label}
@@ -78,53 +87,38 @@ export default function Index() {
       </header>
 
       {/* ── ГЕРОЙ ── */}
-      <section id="hero" className="relative min-h-screen flex flex-col justify-center items-center text-center overflow-hidden">
+      <section id="hero" className="relative min-h-screen flex flex-col items-center text-center overflow-hidden bg-[#1C1C1C]">
+        {/* Фоновая картинка фундамента — занимает нижние 60% */}
         <div className="absolute inset-0">
           <img src={HERO_BG} alt="Фундамент" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#1C1C1C]/80 via-[#1C1C1C]/55 to-[#1C1C1C]/90" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#1C1C1C] via-[#1C1C1C]/40 to-[#1C1C1C]/85" />
         </div>
 
-        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 pt-24 pb-16 w-full">
-          <div className="inline-flex items-center gap-2 border border-[#D97706]/50 bg-[#D97706]/10 text-[#D97706] text-xs uppercase tracking-[0.2em] px-4 py-2 rounded-full mb-8 animate-fade-in">
-            <span className="w-1.5 h-1.5 bg-[#D97706] rounded-full animate-pulse"></span>
-            Екатеринбург и Свердловская область
-          </div>
-
-          <h1 className="font-serif text-4xl sm:text-5xl lg:text-7xl font-semibold leading-tight text-white mb-6 animate-fade-in" style={{ animationDelay: "0.15s", opacity: 0 }}>
-            Фундамент без трещин: лазерная точность геометрии и гарантия{" "}
-            <span className="text-[#D97706]">15 лет</span>
+        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 pt-32 lg:pt-40 pb-16 w-full">
+          <h1 className="font-serif text-4xl sm:text-5xl lg:text-[80px] font-normal leading-[1.05] text-white mb-8 animate-fade-in" style={{ animationDelay: "0.15s", opacity: 0 }}>
+            Фундамент без трещин: лазерная<br className="hidden lg:block" />
+            {" "}точность геометрии и гарантия 15 лет
           </h1>
 
-          <p className="text-white/75 text-base sm:text-xl max-w-2xl mx-auto leading-relaxed mb-10 animate-fade-in" style={{ animationDelay: "0.3s", opacity: 0 }}>
+          <p className="text-white/80 text-base sm:text-lg lg:text-xl max-w-3xl mx-auto leading-relaxed mb-12 animate-fade-in" style={{ animationDelay: "0.3s", opacity: 0 }}>
             Фиксируем смету в договоре до начала работ. Используем малогабаритную технику, чтобы сохранить ваш ландшафт и забор в целости.
           </p>
 
           <button onClick={() => scrollTo("contact")}
-            className="inline-block bg-[#D97706] hover:bg-[#B45309] text-white font-semibold text-base sm:text-lg px-8 sm:px-12 py-4 sm:py-5 rounded transition-all duration-200 hover:scale-105 animate-fade-in"
+            className="inline-block bg-gradient-to-b from-[#F59E0B] to-[#D97706] hover:from-[#FBBF24] hover:to-[#B45309] text-white font-semibold text-base sm:text-lg px-10 sm:px-14 py-4 sm:py-5 rounded-md shadow-lg shadow-[#D97706]/30 transition-all duration-200 hover:scale-[1.02] animate-fade-in"
             style={{ animationDelay: "0.45s", opacity: 0 }}>
             Рассчитать стоимость и забронировать выезд инженера
           </button>
 
-          <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-10 mt-10 animate-fade-in" style={{ animationDelay: "0.6s", opacity: 0 }}>
-            <div className="flex items-center justify-center gap-2 text-white/70 text-sm">
-              <span className="text-lg">🏗</span>
+          <div className="flex flex-col sm:flex-row justify-center gap-5 sm:gap-12 mt-8 animate-fade-in" style={{ animationDelay: "0.6s", opacity: 0 }}>
+            <div className="flex items-center justify-center gap-2 text-white/85 text-sm sm:text-base">
+              <Icon name="HardHat" size={18} className="text-[#D97706]" />
               <span>Бесплатный выезд инженера</span>
             </div>
-            <div className="flex items-center justify-center gap-2 text-white/70 text-sm">
-              <span className="text-lg">📋</span>
+            <div className="flex items-center justify-center gap-2 text-white/85 text-sm sm:text-base">
+              <Icon name="FileText" size={18} className="text-[#D97706]" />
               <span>Работаем по договору</span>
             </div>
-          </div>
-        </div>
-
-        <div className="relative z-10 w-full bg-[#1C1C1C]/85 backdrop-blur-sm border-t border-white/10">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 grid grid-cols-2 lg:grid-cols-4 gap-4 lg:divide-x divide-white/10">
-            {[["240+", "Монолитных плит"], ["15 лет", "Гарантия"], ["0", "Гарантийных случаев"], ["1,5 мм", "Точность на 10 метров"]].map(([val, label]) => (
-              <div key={label} className="text-center px-4 py-2">
-                <div className="font-serif text-2xl sm:text-3xl font-bold text-[#D97706]">{val}</div>
-                <div className="text-white/55 text-xs sm:text-sm mt-1">{label}</div>
-              </div>
-            ))}
           </div>
         </div>
       </section>
