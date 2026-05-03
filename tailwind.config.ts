@@ -19,21 +19,24 @@ export default {
 			}
 		},
 		fontFamily: {
-			serif: ['Cormorant Garamond', 'Georgia', 'serif'],
-			sans: ['Golos Text', 'system-ui', 'sans-serif'],
+			display: ['Montserrat', 'system-ui', 'sans-serif'],
+			sans: ['Inter', 'Manrope', 'system-ui', 'sans-serif'],
+			serif: ['Montserrat', 'system-ui', 'sans-serif'],
 		},
 		extend: {
 			colors: {
 				gold: {
-					DEFAULT: '#D97706',
-					light: '#F59E0B',
-					dark: '#B45309',
+					DEFAULT: '#D4AF37',
+					light: '#E6C76A',
+					dark: '#A8862A',
 				},
 				dark: {
-					DEFAULT: '#1C1C1C',
-					800: '#2A2A2A',
-					700: '#3A3A3A',
-					600: '#4A4A4A',
+					DEFAULT: '#0D0D0D',
+					900: '#0D0D0D',
+					800: '#141414',
+					700: '#1A1A1A',
+					600: '#222222',
+					500: '#2A2A2A',
 				},
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
